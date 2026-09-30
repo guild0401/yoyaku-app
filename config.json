@@ -1,0 +1,55 @@
+{
+  "_README": "このファイルが予約アプリの全設定です。メニュー名・時間・料金・営業時間はここを編集してください。保存してアプリを再起動すれば反映されます。料金(price)は数値(円)、まだ決めていなければ null のままにすると画面に表示されません。",
+
+  "business": {
+    "name": "予約ページ（表示名をここに）",
+    "tagline": "ご希望の日時を選んでご予約ください",
+    "timezone": "Asia/Tokyo",
+    "contact_email": "user@example.com"
+  },
+
+  "calendar": {
+    "_note": "demo_mode が true の間は Google カレンダー無しでも動きます(空き枠は営業時間ルールだけで生成・予定作成はしません)。サービスアカウントを設定したら false にしてください。",
+    "demo_mode": true,
+    "calendar_id": "primary",
+    "service_account_file": "secrets/service_account.json",
+    "send_invite_to_customer": true
+  },
+
+  "availability": {
+    "_note": "weekly_hours は曜日ごとの受付時間帯。複数帯OK(例: 午前と午後)。空配列[]はその曜日休み。",
+    "weekly_hours": {
+      "mon": [["10:00", "18:00"]],
+      "tue": [["10:00", "18:00"]],
+      "wed": [["10:00", "18:00"]],
+      "thu": [["10:00", "18:00"]],
+      "fri": [["10:00", "18:00"]],
+      "sat": [],
+      "sun": []
+    },
+    "slot_granularity_min": 30,
+    "buffer_min": 15,
+    "min_notice_hours": 12,
+    "max_advance_days": 30,
+    "blackout_dates": []
+  },
+
+  "menus": [
+    {
+      "id": "consult30",
+      "name": "個別相談（30分） ※サンプル",
+      "duration_min": 30,
+      "price": null,
+      "description": "（ここに説明文。これはサンプルのメニューです。名前・時間・料金・説明を実際の内容に書き換えてください）",
+      "location": "オンライン"
+    },
+    {
+      "id": "session60",
+      "name": "個別セッション（60分） ※サンプル",
+      "duration_min": 60,
+      "price": null,
+      "description": "（ここに説明文。サンプルです）",
+      "location": "オンライン"
+    }
+  ]
+}

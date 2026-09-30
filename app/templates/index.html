@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ business_name }}｜ご予約</title>
+  <meta name="description" content="{{ tagline }}">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="head">
+      <h1 class="biz">{{ business_name }}</h1>
+      <p class="tagline">{{ tagline }}</p>
+      {% if demo_mode %}
+      <p class="demo-badge">デモ表示中（Googleカレンダー未接続。空き枠は営業時間ルールのみ・予約は記録されますが予定は作成されません）</p>
+      {% endif %}
+    </header>
+
+    <!-- 進行インジケータ -->
+    <ol class="steps" id="steps">
+      <li data-step="1" class="active"><span>1</span>メニュー</li>
+      <li data-step="2"><span>2</span>日時</li>
+      <li data-step="3"><span>3</span>お客様情報</li>
+      <li data-step="4"><span>4</span>完了</li>
+    </ol>
+
+    <!-- STEP 1: メニュー選択 -->
+    <section class="panel" id="panel-menu">
+      <h2 class="panel-title">ご希望のメニューをお選びください</h2>
+      <div class="menu-list" id="menu-list"><p class="loading">読み込み中…</p></div>
+    </section>
+
+    <!-- STEP 2: 日時選択 -->
+    <section class="panel hidden" id="panel-datetime">
+      <button class="back" data-back="menu">← メニューに戻る</button>
+      <div class="chosen" id="chosen-menu"></div>
+      <h2 class="panel-title">日付を選ぶ</h2>
+      <div class="cal-nav">
+        <button id="cal-prev" class="cal-arrow" aria-label="前の週">‹</button>
+        <span id="cal-range"></span>
+        <button id="cal-next" class="cal-arrow" aria-label="次の週">›</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <h2 class="panel-title" id="time-title" style="display:none">時間を選ぶ</h2>
+      <div class="time-grid" id="time-grid"></div>
+    </section>
+
+    <!-- STEP 3: お客様情報 -->
+    <section class="panel hidden" id="panel-form">
+      <button class="back" data-back="datetime">← 日時に戻る</button>
+      <div class="chosen" id="chosen-slot"></div>
+      <h2 class="panel-title">お客様情報のご入力</h2>
+      <form id="booking-form" novalidate>
+        <label>お名前 <span class="req">必須</span>
+          <input type="text" name="name" maxlength="100" autocomplete="name" required>
+        </label>
+        <label>メールアドレス <span class="req">必須</span>
+          <input type="email" name="email" maxlength="200" autocomplete="email" required>
+          <small>このアドレスにカレンダーの招待（確認）が届きます。</small>
+        </label>
+        <label>電話番号 <span class="opt">任意</span>
+          <input type="tel" name="phone" maxlength="40" autocomplete="tel">
+        </label>
+        <label>ご相談内容・ご要望 <span class="opt">任意</span>
+          <textarea name="note" rows="4" maxlength="2000"></textarea>
+        </label>
+        <p class="form-error" id="form-error"></p>
+        <button type="submit" class="primary" id="submit-btn">この内容で予約する</button>
+      </form>
+    </section>
+
+    <!-- STEP 4: 完了 -->
+    <section class="panel hidden" id="panel-done">
+      <div class="done-mark">✓</div>
+      <h2 class="panel-title">ご予約が完了しました</h2>
+      <div class="done-detail" id="done-detail"></div>
+      <p class="done-note" id="done-note"></p>
+      <button class="primary" id="again-btn">別の予約をする</button>
+    </section>
+  </main>
+
+  <footer class="foot">Powered by 予約アプリ</footer>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
